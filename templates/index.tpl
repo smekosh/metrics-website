@@ -117,21 +117,16 @@
 						</thead>
 
 						<tbody>
+							{foreach $top_stories as $story}
 							<tr>
-								<td>Kerry in Saudi Arabia to Discuss Yemen Crisis</td>
+								<td><a href="{$story.url}" target="_blank">{$story.title}</a> 
+									<div class="pull-right"><span class="hints" title="Published {$story.pubdate|date_format:"%A, %B %e, %Y"} at {$story.pubdate|date_format:"%l:%M %p, %Z"}">{$story.pubdate|date_format:"l"}</span></div></td>
+								<td>{$story.pageviews|replace:"-1":"&mdash;"}</td>
+								<td>{$story.social|replace:"-1":"&mdash;"}</td>
+								<td>{$story.comments|replace:"-1":"&mdash;"}</td>
+								<td>{$story.email|replace:"-1":"&mdash;"}</td>
 							</tr>
-							<tr>
-								<td>Counselors Work to Undo Boko Haram's Damage at Nigeria Camp</td>
-							</tr>
-							<tr>
-								<td>Social Media Mock Bizarre Islamic State Reports</td>
-							</tr>
-							<tr>
-								<td>US Facing Dilemmas in Supporting Fragmented Syrian Opposition</td>
-							</tr>
-							<tr>
-								<td>US Tightens Security at Military Bases</td>
-							</tr>
+							{/foreach}
 						</tbody>
 
 					</table>
