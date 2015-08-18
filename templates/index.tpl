@@ -137,6 +137,30 @@
 		</div>
 	</div>
 
+
+
+	<div style="background: #00a651;">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<h4>Popular Searches</h4>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<p>tag cloud</p>
+			</div>
+		</div>
+	</div>
+
+
+
+
+
 	<!-- Bootstrap core JavaScript
 	================================================== -->
 	<!-- Placed at the end of the document so the pages load faster -->
