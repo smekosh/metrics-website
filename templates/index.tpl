@@ -12,7 +12,10 @@
 	<!-- Bootstrap core CSS -->
 	<link href="{$bootstrap}/css/bootstrap.min.css" rel="stylesheet" />
 
-	!-- Custom styles for this template -->
+	<!-- Font Awesome icon font CSS -->
+	<link href="{$homepage}/vendor/components/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+
+	<!-- Custom styles for this template -->
 	<link href="{$homepage}/dashboard.css" rel="stylesheet" />
 
 	<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
@@ -75,23 +78,23 @@
 			<div class="row">
 			
 				<div class="col-xs-6 col-md-3">
-					<h1><span class="jumbo-label">Pageviews</span> 
-					<span class="jumbo-value">345830</span></h1>
+					<h1><span class="jumbo-label"><i class="fa fa-bar-chart"></i> Pageviews</span>
+					<span class="jumbo-value">{$jumbotron_data.pageviews|number_format:0:".":","}</span></h1>
 				</div>
 
 				<div class="col-xs-6 col-md-3">
-					<h1><span class="jumbo-label">Social Shares</span> 
-					<span class="jumbo-value">345830</span></h1>
+					<h1><span class="jumbo-label"><i class="fa fa-share"></i> Social Shares</span> 
+					<span class="jumbo-value">{$jumbotron_data.social|number_format:0:".":","}</span></h1>
 				</div>
 
 				<div class="col-xs-6 col-md-3">
-					<h1><span class="jumbo-label">Comments</span> 
-					<span class="jumbo-value">345830</span></h1>
+					<h1><span class="jumbo-label"><i class="fa fa-comment"></i> Comments</span> 
+					<span class="jumbo-value">{$jumbotron_data.comments|number_format:0:".":","}</span></h1>
 				</div>
 
 				<div class="col-xs-6 col-md-3">
-					<h1><span class="jumbo-label">Email Shares</span> 
-					<span class="jumbo-value">345830</span></h1>
+					<h1><span class="jumbo-label"><i class="fa fa-paper-plane"></i> Email Shares</span> 
+					<span class="jumbo-value">{$jumbotron_data.email|number_format:0:".":","}</span></h1>
 				</div>
 
 			</div>
@@ -99,60 +102,101 @@
 	</div>
 
 	<div class="container">
+		<div class="row">
+			<table class="table col-xs-12 col-md-12">
+				
+				<thead class="blockhead">
+					<tr>
+						<th class="col-xs-6 col-md-5 text-left">Top Stories</th>
+						<th class="col-xs-1 col-md-1 text-right"><i class="fa fa-calendar"></i><span class="hidden-xs"> Pub Date</span></th>
+						<th class="text-right"><i class="fa fa-bar-chart"></i><span class="hidden-xs"> Pageviews</span></th>
+						<th class="text-right"><i class="fa fa-share"></i><span class="hidden-xs"> Social</span></th>
+						<th class="hidden-xs text-right"><i class="fa fa-comment"></i><span class="hidden-xs"> Comments</span></th>
+						<th class="hidden-xs text-right"><i class="fa fa-paper-plane"></i><span class="hidden-xs"> Email</span></th>
+					</tr>
+				</thead>
+
+				<tbody>
+					{foreach $top_stories as $story}
+					<tr>
+						<td class="text-left"><a href="{$story.url}" target="_blank">{$story.title}</a></td>
+						<td class="text-right text-muted small hint" title="Published {$story.pubdate|date_format:"%A, %B %e, %Y"} at {$story.pubdate|date_format:"%l:%M %p, %Z"}"><span class="visible-xs-inline">{$story.pubdate|date_format:"%a"}</span><span class="hidden-xs">{$story.pubdate|date_format:"l"}</span></td>
+						<td class="text-right">{$story.pageviews|number_format:0:".":","|replace:"-1":"&mdash;"}</td>
+						<td class="text-right">{$story.social|number_format:0:".":","|replace:"-1":"&mdash;"}</td>
+						<td class="hidden-xs text-right">{$story.comments|number_format:0:".":","|replace:"-1":"&mdash;"}</td>
+						<td class="hidden-xs text-right">{$story.email|number_format:0:".":","|replace:"-1":"&mdash;"}</td>
+					</tr>
+					{/foreach}
+				</tbody>
+
+			</table>
+		</div>
+	</div>
+
+
+
+	<div class="container">
+		<div class="row">
+			<h2 class="col-xs-12 col-md-12 blockhead">Popular Searches</h2>
+		</div>
+
+		<div class="row">	
+			<div class="col-xs-12 col-md-12">
+				<p>Tag cloud goes here</p>
+			</div>
+		</div>
+
 		<div class="row">
 			
-			<div class="col-md-12">
-				
-				<div class="table-responsive">
-					<table class="table">
-						
-						<thead>
-							<tr>
-								<th>Top Stories for English</th>
-								<th>Pageviews</th>
-								<th>Social</th>
-								<th>Comments</th>
-								<th>Email</th>
-							</tr>
-						</thead>
+			<div class="col-xs-12 col-md-4">
+				<div class="row">
 
-						<tbody>
-							{foreach $top_stories as $story}
-							<tr>
-								<td><a href="{$story.url}" target="_blank">{$story.title}</a> 
-									<div class="pull-right"><span class="hints" title="Published {$story.pubdate|date_format:"%A, %B %e, %Y"} at {$story.pubdate|date_format:"%l:%M %p, %Z"}">{$story.pubdate|date_format:"l"}</span></div></td>
-								<td>{$story.pageviews|replace:"-1":"&mdash;"}</td>
-								<td>{$story.social|replace:"-1":"&mdash;"}</td>
-								<td>{$story.comments|replace:"-1":"&mdash;"}</td>
-								<td>{$story.email|replace:"-1":"&mdash;"}</td>
-							</tr>
-							{/foreach}
-						</tbody>
+					<h2 class="col-xs-12 col-md-12 blockhead" style="background-color: #1330bf;">Top VOA Services</h2>
+					<div class="col-xs-12 col-md-12">
+						<p>services</p>
+					</div>
 
-					</table>
 				</div>
+			</div>
 
+
+			<div class="col-xs-12 col-md-4">
+				<div class="row">
+
+					<h2 class="col-xs-12 col-md-12 blockhead" style="background-color: #469AE9;">Recent Tweets</h2>
+					<div class="col-xs-12 col-md-12">
+						<p>twitter widget goes here</p>
+					</div>
+
+				</div>
+			</div>
+
+
+			<div class="col-xs-12 col-md-4">
+				<div class="row">
+
+					<h2 class="col-xs-12 col-md-12 blockhead" style="background-color: #3B5998;">Top Facebook Post</h2>
+					<div class="col-xs-12 col-md-12">
+						<p>facebook widget goes here</p>
+					</div>
+
+				</div>
 			</div>
 
 		</div>
+
 	</div>
 
 
-
-	<div style="background: #00a651;">
-		<div class="container">
-			<div class="row">
-				<div class="col-md-12">
-					<h4>Popular Searches</h4>
-				</div>
-			</div>
-		</div>
-	</div>
 
 	<div class="container">
 		<div class="row">
-			<div class="col-md-12">
-				<p>tag cloud</p>
+			<h2 class="col-xs-12 col-md-12 blockhead">Last 7 Days</h2>
+		</div>
+
+		<div class="row">	
+			<div class="col-xs-12 col-md-12">
+				<p>Interactive chart goes here.</p>
 			</div>
 		</div>
 	</div>

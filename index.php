@@ -14,6 +14,7 @@ $smarty->assign( "homepage", HOMEPAGE );
 $smarty->assign( "bootstrap", BOOTSTRAP );
 
 // populated by data-sample.php
+$smarty->assign( 'jumbotron_data', $jumbotron_data );
 $smarty->assign( 'top_stories', $top_stories );
 
 // render the page

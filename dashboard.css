@@ -1,13 +1,28 @@
 /* stylesheet for VOA Metrics Dashboard website */
 
-.jumbo-label { font-size: 50%; }
-.jumbo-value { display: block; }
+.jumbo-label { font-size: 35%; }
+.jumbo-value { display: block; font-weight: 200; }
 
 /* firefox-only hack from http://getbootstrap.com/css/#tables-responsive */
 @-moz-document url-prefix() {
   fieldset { display: table-cell; }
 }
 
-.hints {
-	cursor: help;
+.hint { cursor: help; }
+
+.blockhead {
+	background: #00a651;
+	color: #fff;
+}
+
+.table > thead.blockhead > tr > th {
+	border-bottom: none;
+}
+
+h2.blockhead {
+	font-size: 14px;
+	font-weight: 600;
+	line-height: 1.42857;
+    /*padding: 8px;*/
+    padding: 8px 15px;
 }
