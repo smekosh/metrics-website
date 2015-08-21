@@ -78,22 +78,22 @@
 			<div class="row">
 			
 				<div class="col-xs-6 col-md-3">
-					<h1><span class="jumbo-label"><i class="fa fa-bar-chart"></i> Pageviews</span>
+					<h1><span class="jumbo-label text-muted"><i class="fa fa-bar-chart"></i> Pageviews</span>
 					<span class="jumbo-value">{$jumbotron_data.pageviews|number_format:0:".":","}</span></h1>
 				</div>
 
 				<div class="col-xs-6 col-md-3">
-					<h1><span class="jumbo-label"><i class="fa fa-share"></i> Social Shares</span> 
+					<h1><span class="jumbo-label text-muted"><i class="fa fa-share"></i> Social Shares</span> 
 					<span class="jumbo-value">{$jumbotron_data.social|number_format:0:".":","}</span></h1>
 				</div>
 
 				<div class="col-xs-6 col-md-3">
-					<h1><span class="jumbo-label"><i class="fa fa-comment"></i> Comments</span> 
+					<h1><span class="jumbo-label text-muted"><i class="fa fa-comment"></i> Comments</span> 
 					<span class="jumbo-value">{$jumbotron_data.comments|number_format:0:".":","}</span></h1>
 				</div>
 
 				<div class="col-xs-6 col-md-3">
-					<h1><span class="jumbo-label"><i class="fa fa-paper-plane"></i> Email Shares</span> 
+					<h1><span class="jumbo-label text-muted"><i class="fa fa-paper-plane"></i> Email Shares</span> 
 					<span class="jumbo-value">{$jumbotron_data.email|number_format:0:".":","}</span></h1>
 				</div>
 
@@ -103,7 +103,7 @@
 
 	<div class="container">
 		<div class="row">
-			<table class="table col-xs-12 col-md-12">
+			<table class="table table-striped col-xs-12 col-md-12">
 				
 				<thead class="blockhead">
 					<tr>
@@ -120,7 +120,7 @@
 					{foreach $top_stories as $story}
 					<tr>
 						<td class="text-left"><a href="{$story.url}" target="_blank">{$story.title}</a></td>
-						<td class="text-right text-muted small hint" title="Published {$story.pubdate|date_format:"%A, %B %e, %Y"} at {$story.pubdate|date_format:"%l:%M %p, %Z"}"><span class="visible-xs-inline">{$story.pubdate|date_format:"%a"}</span><span class="hidden-xs">{$story.pubdate|date_format:"l"}</span></td>
+						<td class="text-right text-muted hint" title="Published {$story.pubdate|date_format:"%A, %B %e, %Y"} at {$story.pubdate|date_format:"%l:%M %p, %Z"}"><span class="visible-xs-inline">{$story.pubdate|date_format:"%a"}</span><span class="hidden-xs">{$story.pubdate|date_format:"l"}</span></td>
 						<td class="text-right">{$story.pageviews|number_format:0:".":","|replace:"-1":"&mdash;"}</td>
 						<td class="text-right">{$story.social|number_format:0:".":","|replace:"-1":"&mdash;"}</td>
 						<td class="hidden-xs text-right">{$story.comments|number_format:0:".":","|replace:"-1":"&mdash;"}</td>
@@ -145,17 +145,38 @@
 				<p>Tag cloud goes here</p>
 			</div>
 		</div>
+	</div>
+
+
+
+	<div class="container">
 
 		<div class="row">
 			
-			<div class="col-xs-12 col-md-4">
+			<div id="voa-top-services" class="col-xs-12 col-md-4">
 				<div class="row">
 
-					<h2 class="col-xs-12 col-md-12 blockhead" style="background-color: #1330bf;">Top VOA Services</h2>
-					<div class="col-xs-12 col-md-12">
-						<p>services</p>
-					</div>
-
+					<!-- <h2 class="col-xs-12 col-md-12 blockhead" >Top VOA Services<span class="pull-right"><i class="fa fa-bar-chart"></i> Pageviews</span></h2>
+					<div class="col-xs-12 col-md-12"> -->
+					<table class="table table-striped col-xs-12 col-md-12">
+						<thead class="blockhead" style="background-color: #1330bf;">
+							<tr>
+								<!-- <th class="col-xs-1 col-md-1"><span class="sr-only">Rank</span></th> -->
+								<th colspan="2" class="col-xs-6 col-md-6 text-left">Top VOA Services</th>
+								<th class="col-xs-6 col-md-6 text-right"><i class="fa fa-bar-chart"></i> Pageviews</th>
+							</tr>
+						</thead>
+						<tbody>
+							{foreach $top_services as $service}
+							<tr>
+								<td class="text-left">{$service@index+1}</td>
+								<td class="text-left">{$service}</td>
+								<td class="text-right">{$top_services_pageviews[{$service@index}]|number_format:0:".":","}</td>
+							</tr>
+							{/foreach}
+						</tbody>
+					</table>
+					<!-- </div> -->
 				</div>
 			</div>
 
@@ -165,8 +186,17 @@
 
 					<h2 class="col-xs-12 col-md-12 blockhead" style="background-color: #469AE9;">Recent Tweets</h2>
 					<div class="col-xs-12 col-md-12">
-						<p>twitter widget goes here</p>
-					</div>
+						{literal}
+						<a class="twitter-timeline" 
+						   width="100%"
+						   height="360"
+						   data-dnt="true" 
+						   href="https://twitter.com/search?q=%40voanews" 
+						   data-chrome="noheader nofooter noborders transparent"
+						   data-widget-id="634847380127526912">Tweets about @voanews</a>
+						<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+						{/literal}
+          			</div>
 
 				</div>
 			</div>

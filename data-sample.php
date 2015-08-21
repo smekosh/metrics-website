@@ -60,3 +60,15 @@ $top_stories = array(
 		'email'     => rand(0,75)
 	)
 );
+
+
+
+$top_services = array( 'Khmer', 'Learning English', 'Spanish', 'Hausa', 'English', 'Russian', 'Vietnamese', 'Indonesian', 'Persian', 'Mandarin' );
+shuffle( $top_services );
+
+
+$top_services_pageviews = array();
+for ( $i = 1; $i <= 10; $i++ ) {
+	$top_services_pageviews[] = rand(75000,5000000);
+}
+rsort( $top_services_pageviews, SORT_NUMERIC );
