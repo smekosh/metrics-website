@@ -72,3 +72,21 @@ for ( $i = 1; $i <= 10; $i++ ) {
 	$top_services_pageviews[] = rand(75000,5000000);
 }
 rsort( $top_services_pageviews, SORT_NUMERIC );
+
+
+
+$last_7_days = array();
+
+for ( $i = 7; $i >= 1; $i-- ) {
+
+	$date = new DateTime();
+	$date->sub(new DateInterval('P'.$i.'D'));
+
+	$last_7_days['dates'][] = $date->format('U');
+	$last_7_days['pageviews'][] = rand(50000,500000);
+	$last_7_days['social'][] = rand(3000,20000);
+	$last_7_days['comments'][] = rand(50,500);
+	$last_7_days['email'][] = rand(250,2500);
+}
+
+

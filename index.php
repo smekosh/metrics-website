@@ -18,6 +18,7 @@ $smarty->assign( 'jumbotron_data', $jumbotron_data );
 $smarty->assign( 'top_stories', $top_stories );
 $smarty->assign( 'top_services', $top_services );
 $smarty->assign( 'top_services_pageviews', $top_services_pageviews );
+$smarty->assign( 'last_7_days', $last_7_days );
 
 // render the page
 $smarty->display('index.tpl');
