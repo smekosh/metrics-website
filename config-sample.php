@@ -9,3 +9,7 @@ define( "HOMEPAGE",         "http://localhost/metrics-website" );
 define( "APP_PATH",         "/metrics-website" );
 
 define( "BOOTSTRAP", 		APP_PATH."/vendor/twbs/bootstrap/dist" );
+
+define( "PDO_CONN",         "mysql:host=" );
+define( "PDO_USER",         "user" );
+define( "PDO_PASS",         "password" );

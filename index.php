@@ -4,7 +4,8 @@ require_once( 'config.php' );
 require_once( 'vendor/autoload.php' );
 
 // load sample data for the mockup
-include( 'data-sample.php' );
+#include( 'data-sample.php' );
+include( 'data.php' ) ;
 
 // initialize smarty
 $smarty = new Smarty();
