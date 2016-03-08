@@ -21,5 +21,7 @@ $smarty->assign( 'top_services', $top_services );
 $smarty->assign( 'top_services_pageviews', $top_services_pageviews );
 $smarty->assign( 'last_7_days', $last_7_days );
 
+$smarty->assign( 'search_terms', $search_terms );
+
 // render the page
 $smarty->display('index.tpl');

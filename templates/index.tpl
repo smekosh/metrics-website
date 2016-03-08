@@ -76,24 +76,24 @@
 	<div class="jumbotron">
 		<div class="container">
 			<div class="row">
-			
+
 				<div class="col-xs-6 col-md-3">
 					<h1><span class="jumbo-label text-muted"><i class="fa fa-bar-chart"></i> Pageviews</span>
 					<span class="jumbo-value">{$jumbotron_data.pageviews|number_format:0:".":","}</span></h1>
 				</div>
 
 				<div class="col-xs-6 col-md-3">
-					<h1><span class="jumbo-label text-muted"><i class="fa fa-share"></i> Social Shares</span> 
+					<h1><span class="jumbo-label text-muted"><i class="fa fa-share"></i> Social Shares</span>
 					<span class="jumbo-value">{$jumbotron_data.social|number_format:0:".":","}</span></h1>
 				</div>
 
 				<div class="col-xs-6 col-md-3">
-					<h1><span class="jumbo-label text-muted"><i class="fa fa-comment"></i> Comments</span> 
+					<h1><span class="jumbo-label text-muted"><i class="fa fa-comment"></i> Comments</span>
 					<span class="jumbo-value">{$jumbotron_data.comments|number_format:0:".":","}</span></h1>
 				</div>
 
 				<div class="col-xs-6 col-md-3">
-					<h1><span class="jumbo-label text-muted"><i class="fa fa-paper-plane"></i> Email Shares</span> 
+					<h1><span class="jumbo-label text-muted"><i class="fa fa-paper-plane"></i> Email Shares</span>
 					<span class="jumbo-value">{$jumbotron_data.email|number_format:0:".":","}</span></h1>
 				</div>
 
@@ -104,7 +104,7 @@
 	<div class="container">
 		<div class="row">
 			<table class="table table-striped col-xs-12 col-md-12">
-				
+
 				<thead class="blockhead">
 					<tr>
 						<th class="col-xs-6 col-md-5 text-left">Top Stories</th>
@@ -140,9 +140,9 @@
 			<h2 class="col-xs-12 col-md-12 blockhead">Popular Searches</h2>
 		</div>
 
-		<div class="row">	
+		<div class="row">
 			<div class="col-xs-12 col-md-12">
-				<p>Tag cloud goes here</p>
+{include file="cloud.tpl" data=$search_terms}
 			</div>
 		</div>
 	</div>
@@ -152,7 +152,7 @@
 	<div class="container">
 
 		<div class="row">
-			
+
 			<div id="voa-top-services" class="col-xs-12 col-md-4">
 				<div class="row">
 
@@ -187,11 +187,11 @@
 					<h2 class="col-xs-12 col-md-12 blockhead" style="background-color: #469AE9;">Recent Tweets</h2>
 					<div class="col-xs-12 col-md-12">
 						{literal}
-						<a class="twitter-timeline" 
+						<a class="twitter-timeline"
 						   width="100%"
 						   height="360"
-						   data-dnt="true" 
-						   href="https://twitter.com/search?q=%40voanews" 
+						   data-dnt="true"
+						   href="https://twitter.com/search?q=%40voanews"
 						   data-chrome="noheader nofooter noborders transparent"
 						   data-widget-id="634847380127526912">Tweets about @voanews</a>
 						<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
@@ -207,9 +207,9 @@
 
 					<h2 class="col-xs-12 col-md-12 blockhead" style="background-color: #3B5998;">Top Facebook Post</h2>
 					<div class="col-xs-12 col-md-12" id="top-facebook-post-widget">
-						
+
 						{literal}
-						
+
 						<div class="fb-post" data-href="https://www.facebook.com/voiceofamerica/posts/10153193367123074"></div>
 						<div id="fb-root"></div>
 						<script>(function(d, s, id) {
@@ -238,7 +238,7 @@
 			<h2 class="col-xs-12 col-md-12 blockhead">Last <span class="visible-xs-inline">3</span><span class="hidden-xs">7</span> Days</h2>
 		</div>
 
-		<div class="row">	
+		<div class="row">
 			<div class="col-xs-12 col-md-12">
 				<p>Interactive chart goes here.</p>
 			</div>
@@ -247,11 +247,11 @@
 		<div class="row">
 
 			<table class="table table-striped col-xs-12 col-md-12">
-				
+
 				<thead class="blockhead" style="background-color: #bbb;">
 					<tr>
 						<th><span class="sr-only">Metric</span></th>
-						
+
 						{foreach $last_7_days.dates as $date}
 						<th class="text-right{if $date@index < 4} hidden-xs{/if}">{if $date@index == 6}Yesterday{else}{$date|date_format:"l"}{/if}</th>
 						{/foreach}
