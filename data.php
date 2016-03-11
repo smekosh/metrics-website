@@ -24,7 +24,7 @@ class metricsData {
      */
     function query_max() {
         $st = $this->db->prepare(
-            "select `day`, `hour` from reports order by `id` desc limit 1"
+            "select `day`, `hour` from `reports` order by `id` desc limit 1"
         );
         $st->execute();
         $this->max = $st->fetch(PDO::FETCH_ASSOC);
@@ -196,7 +196,18 @@ class metricsData {
      * @todo make this work
      */
     function get_pubdate_by_article_id($article_id) {
-        // $st->this
+        $st = $this->db->prepare("
+            select * from `urltrap` where `article_id`=:article_id"
+        );
+        $st->execute(array(
+            "article_id" => $article_id
+        ));
+
+        $r = $st->fetch(PDO::FETCH_ASSOC);
+        if( !$r ) return("0");
+
+        $ts = strtotime($r["pubdate"]);
+        return( date("r", $ts) );
     }
 
     /**
@@ -267,7 +278,7 @@ class metricsData {
             $v["pageviews"] = $v["combined_pageviews"];
             $v["social"] = $v["shares"];
             $v["email"] = 0;
-            $v["pubdate"] = 0;
+            $v["pubdate"] = $this->get_pubdate_by_article_id($v["article_id"]);
             $retarr[] = $v;
         }
         return( $retarr );
@@ -335,15 +346,16 @@ class metricsData {
     function query_search_terms($day) {
         $st = $this->db->prepare("
             select * from `searches` where
-            `day`=:day and
+            1 and
             term!='::unspecified::'"
         );
         $st->execute(array(
             "day" => $day
         ));
         $terms = $st->fetchAll(PDO::FETCH_ASSOC);
-
+#echo "<PRE>"; print_r( $terms); die;
         $terms = $this->combine_search_terms($terms);
+#echo "<PRE>"; print_r( $terms); die;
         return( $terms );
     }
 }

@@ -119,7 +119,7 @@
 				<tbody>
 					{foreach $top_stories as $story}
 					<tr>
-						<td class="text-left"><a href="{$story.url}" target="_blank">{$story.title}</a></td>
+						<td class="text-left"><a href="{$story.url}" target="_blank">{$story.title|default:'(Untitled or Title Missing)'}</a></td>
 						<td class="text-right text-muted hint" title="Published {$story.pubdate|date_format:"%A, %B %e, %Y"} at {$story.pubdate|date_format:"%l:%M %p, %Z"}"><span class="visible-xs-inline">{$story.pubdate|date_format:"%a"}</span><span class="hidden-xs">{$story.pubdate|date_format:"l"}</span></td>
 						<td class="text-right">{$story.pageviews|number_format:0:".":","|replace:"-1":"&mdash;"}</td>
 						<td class="text-right">{$story.social|number_format:0:".":","|replace:"-1":"&mdash;"}</td>
