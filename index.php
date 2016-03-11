@@ -5,6 +5,7 @@ require_once( 'vendor/autoload.php' );
 
 // load sample data for the mockup
 #include( 'data-sample.php' );
+date_default_timezone_set( 'America/New_York' );
 include( 'data.php' ) ;
 
 // initialize smarty
