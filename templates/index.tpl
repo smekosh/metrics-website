@@ -62,7 +62,7 @@
             -->
           </ul>
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="#">Last updated 3.5 hours ago</a></li>
+            <li><a href="#">Last updated {$latest_entry.stamp|ago} ago</a></li>
             <!--
             <li><a href="../navbar/">Default</a></li>
             <li><a href="../navbar-static-top/">Static top</a></li>

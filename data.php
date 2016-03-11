@@ -24,7 +24,7 @@ class metricsData {
      */
     function query_max() {
         $st = $this->db->prepare(
-            "select `day`, `hour` from `reports` order by `id` desc limit 1"
+            "select `day`, `hour`, `stamp` from `reports` order by `id` desc limit 1"
         );
         $st->execute();
         $this->max = $st->fetch(PDO::FETCH_ASSOC);
@@ -382,5 +382,7 @@ $jumbotron_data["social"] = $metrics->query_total_shares(
 );
 
 $jumbotron_data["email"] = 0;
+
+$latest_entry = $metrics->max;
 
 $search_terms = $metrics->query_search_terms($metrics->max["day"]);
