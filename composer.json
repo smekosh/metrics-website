@@ -2,6 +2,7 @@
     "require": {
         "twbs/bootstrap": "^3.3",
         "smarty/smarty": "~3.1",
-        "components/font-awesome": "^4.4"
+        "components/font-awesome": "^4.4",
+        "pp19dd/smarty_modifier_ago": "^0.0.1"
     }
 }
