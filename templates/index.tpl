@@ -310,6 +310,6 @@
 
 	<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
 	<script src="{$homepage}/assets/ie10-viewport-bug-workaround.js"></script>
-{debug}
+
 </body>
 </html>
