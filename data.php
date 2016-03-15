@@ -250,17 +250,23 @@ class metricsData {
             select
                 count(*) as `rows`,
                 `article_id`,
-                max(`fb.shares`) as `shares`
-            from reports
-                where `fb.shares`>0 and
-                `day`=:day"
+                max(`fb.shares`) as `shares`,
+                `urltype`
+            from `reports`
+            where `fb.shares`>0 and
+            `day`=:day
+            group by `article_id`"
         );
         $st->execute(array(
             "day" => $day
         ));
 
-        $comment_count = $st->fetch(PDO::FETCH_ASSOC);
-        return( $comment_count["shares"] );
+        $articles = $st->fetchAll(PDO::FETCH_ASSOC);
+        $count = 0;
+        foreach( $articles as $article ) {
+            $count += $article["shares"];
+        }
+        return( $count );
     }
 
     /**
