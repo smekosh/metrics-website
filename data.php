@@ -346,7 +346,7 @@ class metricsData {
     function query_search_terms($day) {
         $st = $this->db->prepare("
             select * from `searches` where
-            1 and
+            `day`=:day and
             term!='::unspecified::'"
         );
         $st->execute(array(
