@@ -18,9 +18,6 @@
 	<!-- Custom styles for this template -->
 	<link href="{$homepage}/dashboard.css" rel="stylesheet" />
 
-	<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-	<script src="{$bootstrap}/js/ie10-viewport-bug-workaround.js"></script>
-
 	<!--[if lt IE 9]>
 	<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
 	<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
@@ -91,12 +88,12 @@
 					<h1><span class="jumbo-label text-muted"><i class="fa fa-comment"></i> Comments</span>
 					<span class="jumbo-value">{$jumbotron_data.comments|number_format:0:".":","}</span></h1>
 				</div>
-
+{*<!--
 				<div class="col-xs-6 col-md-3">
 					<h1><span class="jumbo-label text-muted"><i class="fa fa-paper-plane"></i> Email Shares</span>
 					<span class="jumbo-value">{$jumbotron_data.email|number_format:0:".":","}</span></h1>
 				</div>
-
+-->*}
 			</div>
 		</div>
 	</div>
@@ -112,7 +109,7 @@
 						<th class="text-right"><i class="fa fa-bar-chart"></i><span class="hidden-xs"> Pageviews</span></th>
 						<th class="text-right"><i class="fa fa-share"></i><span class="hidden-xs"> Social</span></th>
 						<th class="hidden-xs text-right"><i class="fa fa-comment"></i><span class="hidden-xs"> Comments</span></th>
-						<th class="hidden-xs text-right"><i class="fa fa-paper-plane"></i><span class="hidden-xs"> Email</span></th>
+						{*<!--<th class="hidden-xs text-right"><i class="fa fa-paper-plane"></i><span class="hidden-xs"> Email</span></th>-->*}
 					</tr>
 				</thead>
 
@@ -128,7 +125,7 @@
 						<td class="text-right">{$story.pageviews|number_format:0:".":","|replace:"-1":"&mdash;"}</td>
 						<td class="text-right">{$story.social|number_format:0:".":","|replace:"-1":"&mdash;"}</td>
 						<td class="hidden-xs text-right">{$story.comments|number_format:0:".":","|replace:"-1":"&mdash;"}</td>
-						<td class="hidden-xs text-right">{$story.email|number_format:0:".":","|replace:"-1":"&mdash;"}</td>
+						{*<!--<td class="hidden-xs text-right">{$story.email|number_format:0:".":","|replace:"-1":"&mdash;"}</td>-->*}
 					</tr>
 					{/foreach}
 				</tbody>
@@ -310,9 +307,9 @@
 	<!-- Placed at the end of the document so the pages load faster -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 	<script src="{$bootstrap}/js/bootstrap.min.js"></script>
-	<script src="../../assets/js/docs.min.js"></script>
-	<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-	<script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
 
+	<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+	<script src="{$homepage}/assets/ie10-viewport-bug-workaround.js"></script>
+{debug}
 </body>
 </html>
