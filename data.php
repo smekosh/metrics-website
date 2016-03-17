@@ -313,8 +313,7 @@ class metricsData {
                 `day`=:day and
                 `hour`=:hour
             group by article_id
-            order by combined_pageviews desc
-            limit 5"
+            order by combined_pageviews desc"
         );
         $st->execute(array(
             "day" => $day,

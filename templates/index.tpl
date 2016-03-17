@@ -114,7 +114,7 @@
 				</thead>
 
 				<tbody>
-					{foreach $top_stories as $story}
+{foreach $top_stories as $story}
 					<tr>
 						<td class="text-left"><a href="{$story.url}" target="_blank">{$story.title|default:'(Untitled or Title Missing)'}</a></td>
 {if $story.pubdate}
@@ -127,7 +127,7 @@
 						<td class="hidden-xs text-right">{$story.comments|number_format:0:".":","|replace:"-1":"&mdash;"}</td>
 						{*<!--<td class="hidden-xs text-right">{$story.email|number_format:0:".":","|replace:"-1":"&mdash;"}</td>-->*}
 					</tr>
-					{/foreach}
+{/foreach}
 				</tbody>
 
 			</table>
