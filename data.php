@@ -330,7 +330,7 @@ class metricsData {
      *
      * @param array $terms Queried search terms from omniture
      */
-    function combine_search_terms($terms) {
+    function combine_search_terms($terms, $limit = 20) {
         $ret = array();
         foreach( $terms as $term ) {
             $key = $term["term"];
@@ -341,7 +341,8 @@ class metricsData {
 
             $ret[$key] += $term["visits"];
         }
-        return( $ret );
+
+        return( array_slice($ret, 0, $limit) );
     }
 
     /**
@@ -353,7 +354,8 @@ class metricsData {
         $st = $this->db->prepare("
             select * from `searches` where
             `day`=:day and
-            term!='::unspecified::'"
+            `term`!='::unspecified::'
+            order by `visits` desc"
         );
         $st->execute(array(
             "day" => $day
