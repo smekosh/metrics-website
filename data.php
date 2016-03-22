@@ -349,6 +349,22 @@ class metricsData {
      *
      * @param string $day Day in YYYY-MM-DD format
      */
+    function query_article_count($day) {
+        $st = $this->db->prepare(
+            "select count(*) as `count` from `urltrap` where `day`=:day"
+        );
+        $st->execute(array(
+            "day" => $day
+        ));
+        $res = $st->fetch(PDO::FETCH_ASSOC);
+        return( $res["count"] );
+    }
+
+    /**
+     * returns list of search terms for a day
+     *
+     * @param string $day Day in YYYY-MM-DD format
+     */
     function query_search_terms($day) {
         $st = $this->db->prepare("
             select * from `searches` where
@@ -386,6 +402,10 @@ $jumbotron_data["comments"] = $metrics->query_total_comments(
 $jumbotron_data["social"] = $metrics->query_total_shares(
     $metrics->max["day"],
     $metrics->max["hour"]
+);
+
+$jumbotron_data["articles"] = $metrics->query_article_count(
+    $metrics->max["day"]
 );
 
 $jumbotron_data["email"] = 0;
