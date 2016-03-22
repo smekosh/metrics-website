@@ -100,37 +100,7 @@
 
 	<div class="container">
 		<div class="row">
-			<table class="table table-striped col-xs-12 col-md-12">
-
-				<thead class="blockhead">
-					<tr>
-						<th class="col-xs-6 col-md-5 text-left">Top Stories</th>
-						<th class="col-xs-1 col-md-2 text-right"><i class="fa fa-calendar"></i><span class="hidden-xs"> Pub Date</span></th>
-						<th class="text-right"><i class="fa fa-bar-chart"></i><span class="hidden-xs"> Pageviews</span></th>
-						<th class="text-right"><i class="fa fa-share"></i><span class="hidden-xs"> Social</span></th>
-						<th class="hidden-xs text-right"><i class="fa fa-comment"></i><span class="hidden-xs"> Comments</span></th>
-						{*<!--<th class="hidden-xs text-right"><i class="fa fa-paper-plane"></i><span class="hidden-xs"> Email</span></th>-->*}
-					</tr>
-				</thead>
-
-				<tbody>
-{foreach $top_stories as $story}
-					<tr>
-						<td class="text-left"><a href="{$story.url}" target="_blank">{$story.title|default:'(Untitled or Title Missing)'}</a></td>
-{if $story.pubdate}
-						<td class="text-right text-muted hint" title="Published {$story.pubdate|date_format:"%A, %B %e, %Y"} at {$story.pubdate|date_format:"%l:%M %p, %Z"}"><span class="visible-xs-inline">{$story.pubdate|date_format:"%a"}</span><span class="hidden-xs">{$story.pubdate|date_format:"l"} <span style='color:silver'>({$story.pubdate|ago} ago)</span></span></td>
-{else}
-						<td class="text-right text-muted hint" title="Unknown Published Date"><span class="visible-xs-inline">Unknown</span><span class="hidden-xs">Unknown</span></td>
-{/if}
-						<td class="text-right">{$story.pageviews|number_format:0:".":","|replace:"-1":"&mdash;"}</td>
-						<td class="text-right">{$story.social|number_format:0:".":","|replace:"-1":"&mdash;"}</td>
-						<td class="hidden-xs text-right">{$story.comments|number_format:0:".":","|replace:"-1":"&mdash;"}</td>
-						{*<!--<td class="hidden-xs text-right">{$story.email|number_format:0:".":","|replace:"-1":"&mdash;"}</td>-->*}
-					</tr>
-{/foreach}
-				</tbody>
-
-			</table>
+{include file="topstories.tpl"}
 		</div>
 	</div>
 
@@ -149,35 +119,14 @@
 	</div>
 
 
-
+{*
 	<div class="container">
 
 		<div class="row">
 
 			<div id="voa-top-services" class="col-xs-12 col-md-4">
 				<div class="row">
-
-					<!-- <h2 class="col-xs-12 col-md-12 blockhead" >Top VOA Services<span class="pull-right"><i class="fa fa-bar-chart"></i> Pageviews</span></h2>
-					<div class="col-xs-12 col-md-12"> -->
-					<table class="table table-striped col-xs-12 col-md-12">
-						<thead class="blockhead" style="background-color: #1330bf;">
-							<tr>
-								<!-- <th class="col-xs-1 col-md-1"><span class="sr-only">Rank</span></th> -->
-								<th colspan="2" class="col-xs-6 col-md-6 text-left">Top VOA Services</th>
-								<th class="col-xs-6 col-md-6 text-right"><i class="fa fa-bar-chart"></i> Pageviews</th>
-							</tr>
-						</thead>
-						<tbody>
-							{foreach $top_services as $service}
-							<tr>
-								<td class="text-left">{$service@index+1}</td>
-								<td class="text-left">{$service}</td>
-								<td class="text-right">{$top_services_pageviews[{$service@index}]|number_format:0:".":","}</td>
-							</tr>
-							{/foreach}
-						</tbody>
-					</table>
-					<!-- </div> -->
+{include file="topservices.tpl"}
 				</div>
 			</div>
 
@@ -209,7 +158,7 @@
 					<h2 class="col-xs-12 col-md-12 blockhead" style="background-color: #3B5998;">Top Facebook Post</h2>
 					<div class="col-xs-12 col-md-12" id="top-facebook-post-widget">
 
-						{literal}
+{literal}
 
 						<div class="fb-post" data-href="https://www.facebook.com/voiceofamerica/posts/10153193367123074"></div>
 						<div id="fb-root"></div>
@@ -221,7 +170,7 @@
 							fjs.parentNode.insertBefore(js, fjs);
 						}(document, 'script', 'facebook-jssdk'));</script>
 
-						{/literal}
+{/literal}
 
 					</div>
 
@@ -232,7 +181,7 @@
 
 	</div>
 
-
+*}
 
 	<div class="container">
 		<div class="row">
@@ -241,60 +190,12 @@
 
 		<div class="row">
 			<div class="col-xs-12 col-md-12">
-				<p>Interactive chart goes here.</p>
+{include file="chart.tpl"}
 			</div>
 		</div>
 
 		<div class="row">
-
-			<table class="table table-striped col-xs-12 col-md-12">
-
-				<thead class="blockhead" style="background-color: #bbb;">
-					<tr>
-						<th><span class="sr-only">Metric</span></th>
-
-						{foreach $last_7_days.dates as $date}
-						<th class="text-right{if $date@index < 4} hidden-xs{/if}">{if $date@index == 6}Yesterday{else}{$date|date_format:"l"}{/if}</th>
-						{/foreach}
-					</tr>
-				</thead>
-
-				<tbody>
-					<tr>
-						<td><i class="fa fa-bar-chart"></i> Pageviews</td>
-
-						{foreach $last_7_days.pageviews as $metric}
-						<td class="text-right{if $metric@index < 4} hidden-xs{/if}">{$metric|number_format:0:".":","}</td>
-						{/foreach}
-					</tr>
-
-					<tr>
-						<td><i class="fa fa-share"></i> Social</td>
-
-						{foreach $last_7_days.social as $metric}
-						<td class="text-right{if $metric@index < 4} hidden-xs{/if}">{$metric|number_format:0:".":","}</td>
-						{/foreach}
-					</tr>
-
-					<tr>
-						<td><i class="fa fa-comment"></i> Comments</td>
-
-						{foreach $last_7_days.comments as $metric}
-						<td class="text-right{if $metric@index < 4} hidden-xs{/if}">{$metric|number_format:0:".":","}</td>
-						{/foreach}
-					</tr>
-
-					<tr>
-						<td><i class="fa fa-paper-plane"></i> Email</td>
-
-						{foreach $last_7_days.email as $metric}
-						<td class="text-right{if $metric@index < 4} hidden-xs{/if}">{$metric|number_format:0:".":","}</td>
-						{/foreach}
-					</tr>
-				</tbody>
-
-			</table>
-
+{include file="last7days.tpl"}
 		</div>
 	</div>
 
