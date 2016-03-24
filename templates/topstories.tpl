@@ -18,7 +18,7 @@
             <td class="text-left"><a href="{$story.url}" target="_blank">{$story.title|default:'(Untitled or Title Missing)'}</a></td>
 {if $story.pubdate}
             <td class="text-left text-muted hint" title="Published {$story.pubdate|date_format:"%A, %B %e, %Y"} at {$story.pubdate|date_format:"%l:%M %p, %Z"}"><span class="visible-xs-inline">{$story.pubdate|date_format:"%a"}</span><span class="hidden-xs">{$story.pubdate|date_format:"l"}</span></td>
-            <td class="text-left text-muted hint" title="Published {$story.pubdate|date_format:"%A, %B %e, %Y"} at {$story.pubdate|date_format:"%l:%M %p, %Z"}"><span class="visible-xs-inline">{$story.pubdate|date_format:"%a"}</span><span style='color:silver; padding-left:2em'>{$story.pubdate|ago} ago</span></span></td>
+            <td class="text-left text-muted hint" title="Published {$story.pubdate|date_format:"%A, %B %e, %Y"} at {$story.pubdate|date_format:"%l:%M %p, %Z"}"><span class="visible-xs-inline">{$story.pubdate|date_format:"%a"}</span><span class="pubdate-relative">{$story.pubdate|ago} ago</span></span></td>
 {else}
             <td class="text-left text-muted hint" title="Unknown Published Date"><span class="visible-xs-inline">Unknown</span><span class="hidden-xs">Unknown</span></td>
             <td class="text-left text-muted hint" title="Unknown Published Date"></td>
