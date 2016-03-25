@@ -54,3 +54,20 @@ h2.blockhead {
     color:silver;
     white-space:nowrap;
 }
+
+.chart-selector {
+    cursor: pointer;
+}
+
+.chart-container { height: 240px }
+
+
+svg .horizontal path { stroke:#dedede; stroke-width:1; }
+svg .lines path { stroke:#dedede; stroke-width:6; }
+svg .points circle { stroke:#00a651; stroke-width:4px; fill:#ffffff; }
+svg .labels { text-anchor:middle };
+
+.chart-table { width: 100%; }
+.chart-table .chart-selector { width: 20% }
+.chart-table td { width: 10%; }
+.active-chart { background-color: #cbeddb !important; }

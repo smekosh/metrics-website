@@ -218,5 +218,24 @@
 	<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
 	<script src="{$homepage}/assets/ie10-viewport-bug-workaround.js"></script>
 
+<script>
+    function show_chart(chart_id, that) {
+        $("svg.chart").hide();
+        var chart = $("#" + chart_id);
+        chart.css({ height: '1px' });
+        chart.show();
+        chart.stop().animate({ height: '240px' }, 300);
+    }
+    $(document).ready(function() {
+        $(".chart-selector").click(function() {
+            var chart_id = $(this).attr("data-chart-id");
+            show_chart(chart_id);
+            $(".chart-table tr").removeClass("active-chart");
+            $(this).parent().addClass("active-chart");
+        });
+        show_chart('chart_1');
+    });
+</script>
+
 </body>
 </html>
