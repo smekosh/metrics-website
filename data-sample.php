@@ -14,7 +14,7 @@ $jumbotron_data = array(
 
 
 $top_stories = array(
-	array( 
+	array(
 		'title'     => 'Kerry in Saudi Arabia to Discuss Yemen Crisis',
 		'pubdate'   => date('U'),
 		'url'       => 'nada',
@@ -23,7 +23,7 @@ $top_stories = array(
 		'comments'  => rand(-1,150),
 		'email'     => rand(0,75)
 	),
-	array( 
+	array(
 		'title'     => 'Counselors Work to Undo Boko Haram\'s Damage at Nigeria Camp',
 		'pubdate'   => date('U') - 3000 * 2,
 		'url'       => 'nada',
@@ -32,7 +32,7 @@ $top_stories = array(
 		'comments'  => rand(-1,150),
 		'email'     => rand(0,75)
 	),
-	array( 
+	array(
 		'title'     => 'Social Media Mock Bizarre Islamic State Reports',
 		'pubdate'   => date('U') - 3000 * 7,
 		'url'       => 'nada',
@@ -41,7 +41,7 @@ $top_stories = array(
 		'comments'  => rand(-1,150),
 		'email'     => rand(0,75)
 	),
-	array( 
+	array(
 		'title'     => 'US Facing Dilemmas in Supporting Fragmented Syrian Opposition',
 		'pubdate'   => date('U') - 3000 * 30,
 		'url'       => 'nada',
@@ -50,7 +50,7 @@ $top_stories = array(
 		'comments'  => rand(-1,150),
 		'email'     => rand(0,75)
 	),
-	array( 
+	array(
 		'title'     => 'US Tightens Security at Military Bases',
 		'pubdate'   => date('U') - 3000 * 55,
 		'url'       => 'nada',
@@ -88,5 +88,3 @@ for ( $i = 7; $i >= 1; $i-- ) {
 	$last_7_days['comments'][] = rand(50,500);
 	$last_7_days['email'][] = rand(250,2500);
 }
-
-

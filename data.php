@@ -20,15 +20,40 @@ class metricsData {
 
     /**
      * gets most recent report's day and hour
-     * stores to $this->max and returns as array
+     * stores to $this->max
+     * and always returns query as array
      */
     function query_max() {
         $st = $this->db->prepare(
-            "select `day`, `hour`, `stamp` from `reports` order by `id` desc limit 1"
+            "select
+                `day`, `hour`, `stamp`
+            from `reports`
+            order by `id` desc
+            limit 1"
         );
         $st->execute();
-        $this->max = $st->fetch(PDO::FETCH_ASSOC);
-        return( $this->max );
+        $ret = $st->fetch(PDO::FETCH_ASSOC);
+        $this->max = $ret;
+        return( $ret );
+    }
+
+    /**
+     * gets a particular day's most recent report's hour
+     * returns as array
+     */
+    function query_max_day($day) {
+        $temp = $this->max;
+        $st = $this->db->prepare(
+            "select
+                `day`, `hour`, `stamp`
+            from `reports`
+            where `day`=:day
+            order by `id` desc
+            limit 1"
+        );
+        $st->execute(array("day" => $day));
+        $ret = $st->fetch(PDO::FETCH_ASSOC);
+        return( $ret );
     }
 
     /**
@@ -233,6 +258,8 @@ class metricsData {
         ));
 
         $comment_count = $st->fetch(PDO::FETCH_ASSOC);
+        if( is_null($comment_count["comments_total"]) ) return( 0 );
+
         return( $comment_count["comments_total"] );
     }
 
@@ -381,6 +408,34 @@ class metricsData {
 #echo "<PRE>"; print_r( $terms); die;
         return( $terms );
     }
+
+    /**
+    * returns complex array of metrics info for the past week starting from day
+     *
+     * @param string $day Day in YYYY-MM-DD format
+     */
+    function query_last_7_days($day) {
+        $ret = array(
+            "dates" => array(),
+            "pageviews" => array(),
+            "social" => array(),
+            "comments" => array(),
+            "email" => array(),
+            "articles" => array()
+        );
+        for( $i = 6; $i >= 0; $i-- ) {
+            $computed_day = date("Y-m-d", strtotime("-{$i} day") );
+            $day_max = $this->query_max_day($computed_day);
+
+            $ret["dates"][] = $computed_day;
+            $ret["articles"][] = $this->query_article_count($computed_day);
+            $ret["comments"][] = $this->query_total_comments($computed_day, $day_max["hour"]);
+            $ret["pageviews"][] = $this->query_total_pageviews($computed_day, $day_max["hour"]);
+            $ret["social"][] = $this->query_total_shares($computed_day, $day_max["hour"]);
+            $ret["email"][] = 0;
+        }
+        return( $ret );
+    }
 }
 
 $metrics = new metricsData();
@@ -413,3 +468,5 @@ $jumbotron_data["email"] = 0;
 $latest_entry = $metrics->max;
 
 $search_terms = $metrics->query_search_terms($metrics->max["day"]);
+
+$last_7_days = $metrics->query_last_7_days($metrics->max["day"]);
