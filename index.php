@@ -16,6 +16,13 @@ $smarty = new Smarty();
 $smarty->assign( "homepage", HOMEPAGE );
 $smarty->assign( "bootstrap", BOOTSTRAP );
 
+// for debugging
+if( isset( $_GET['stats']) ) {
+    include( 'stats.php' );
+    $smarty->display('stats.tpl');
+    die;
+}
+
 // populated by data-sample.php
 $smarty->assign( 'jumbotron_data', $jumbotron_data );
 $smarty->assign( 'top_stories', $top_stories );

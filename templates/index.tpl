@@ -206,7 +206,9 @@
 	</div>
 
 
+{/block}
 
+{block name="footer"}
 
 
 	<!-- Bootstrap core JavaScript

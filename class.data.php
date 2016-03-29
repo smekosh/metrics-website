@@ -433,3 +433,87 @@ class metricsData {
         return( $ret );
     }
 }
+
+class metricsStats extends metricsData {
+    function countGeneric($table, $day = null) {
+        if( is_null($day) ) {
+            $st = $this->db->prepare(
+                "select count(*) as `count` from `{$table}`"
+            );
+            $st->execute();
+        } else {
+            $st = $this->db->prepare(
+                "select count(*) as `count` from `{$table}` where `day`=:day"
+            );
+            $st->execute(array("day" => $day));
+        }
+        $r = $st->fetch(PDO::FETCH_ASSOC);
+        return( $r["count"] );
+    }
+
+    function countReports($day = null) {
+        return( $this->countGeneric("reports", $day) );
+    }
+
+    function countSearches($day = null) {
+        return( $this->countGeneric("searches", $day) );
+    }
+
+    function countURLtrap($day = null) {
+        return( $this->countGeneric("urltrap", $day) );
+    }
+
+    function countTables($day = null) {
+        return( array(
+            "reports" => $this->countReports($day),
+            "searches" => $this->countSearches($day),
+            "urltrap" => $this->countURLtrap($day)
+        ));
+    }
+
+    function getCalendar($year = null, $month = null) {
+        $cal = array();
+        $ts = time();
+
+        if( !is_null($year) && !is_null($month) ) {
+            $ts = strtotime("{$year}-{$month}-01");
+        }
+
+        $days = date("t", $ts);
+        $starting_day = strtotime(date("Y-m", $ts) . "-01");
+        $starting_day_of_the_week = date("w", $starting_day);
+
+        // pad beginning days
+        for( $i = 0; $i < $starting_day_of_the_week; $i++ ) {
+            $cal[] = array();
+        }
+
+        for( $i = 0; $i < $days; $i++ ) {
+            $ts = strtotime("+{$i} day", $starting_day);
+            $cal[] = array(
+                "date" => date("Y-m-d", $ts),
+                "day" => date("l", $ts)
+            );
+        }
+
+        $cal = array_chunk($cal, 7);
+        return( $cal );
+    }
+
+    // for charts
+    function getHistogramReports($day) {
+        #$ret = array();
+        $st = $this->db->prepare(
+            "select `hour`, count(*) as `count` from `reports` where `day`=:day and urltype='m' group by `hour` order by `hour`"
+        );
+        $st->execute(array("day" => $day));
+        $r = $st->fetchAll(PDO::FETCH_ASSOC);
+
+        #foreach( $r as $k => $v ) {
+        #    $ret[] = array($v["count"], $v["count"]);
+        #}
+        return( $r );
+        # return( $ret );
+    }
+
+}
