@@ -70,6 +70,8 @@
       </div>
     </nav>
 
+{block name="body"}
+
 	<div class="jumbotron">
 		<div class="container">
 			<div class="row">
@@ -234,6 +236,8 @@
         show_chart('chart_1');
     });
 </script>
+
+{/block}
 
 </body>
 </html>
