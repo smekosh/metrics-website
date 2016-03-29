@@ -2,6 +2,7 @@
 
 require_once( 'config.php' );
 require_once( 'vendor/autoload.php' );
+require_once( 'class.data.php' );
 
 // load sample data for the mockup
 #include( 'data-sample.php' );
