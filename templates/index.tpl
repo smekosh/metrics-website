@@ -224,9 +224,9 @@
     function show_chart(chart_id, that) {
         $("svg.chart").hide();
         var chart = $("#" + chart_id);
-        chart.css({ height: '1px' });
+        // chart.css({ height: '1px' });
         chart.show();
-        chart.stop().animate({ height: '240px' }, 300);
+        // chart.stop().animate({ height: '240px' }, 300);
     }
     $(document).ready(function() {
         $(".chart-selector").click(function() {
