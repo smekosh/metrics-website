@@ -15,7 +15,7 @@ table.stats { }
 .sparkline { margin-top:1px }
 </style>
 
-<div class="jumbotron">
+    <div class="jumbotron">
 		<div class="container">
 			<div class="row">
 
@@ -38,6 +38,7 @@ table.stats { }
 		</div>
 	</div>
 
+{*<!--
     <div class="container">
         <div class="row">
             <div class="col-xs-12 col-md-12">
@@ -90,7 +91,14 @@ table.stats { }
             </div>
         </div>
     </div>
-
+-->*}
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12 col-md-12">
+            <div id="chart_1"></div>
+        </div>
+    </div>
+</div>
 
 {/block}
 
@@ -99,6 +107,8 @@ table.stats { }
 <script src="https://code.highcharts.com/highcharts.js"></script>
 
 <script>
+var chart1_labels_x = {$chart1_labels_x|json_encode};
+
 $("#chart_1").highcharts({
     chart: {
         type: "scatter",
@@ -111,9 +121,16 @@ $("#chart_1").highcharts({
             text: 'Day'
         },
         startOnTick: true,
-        endOnTick: true
+        endOnTick: true,
+        tickLength: 1,
+        labels: {
+            formatter: function() {
+                return( chart1_labels_x[this.value] );
+            }
+        }
     },
     yAxis: {
+        max: 23,
         title: {
             text: 'Hour'
         },
@@ -124,6 +141,11 @@ $("#chart_1").highcharts({
         series: {
             pointStart: 0,
             pointInterval: 1
+        }
+    },
+    tooltip: {
+        formatter: function() {
+            return( chart1_labels_x[this.x] + " at " + this.y + ":00" )
         }
     },
     series:[

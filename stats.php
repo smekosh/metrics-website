@@ -14,6 +14,8 @@ $range = array(
 
 // reports graph
 $chart1 = array();
+$chart1_labels_x = array();
+
 $day_count = 0;
 
 $cal = $stats->getCalendar();
@@ -24,6 +26,8 @@ foreach( $cal as $k => $week ) {
         $day_count++;
 
         $t = $stats->countTables($day["date"]);
+
+        $chart1_labels_x[] = $day["date"];
         $cal[$k][$k2]["tables"] = $t;
 
         $x = $stats->getHistogramReports($day["date"]);
@@ -53,3 +57,4 @@ foreach( $range as $k => $v ) {
 $smarty->assign( 'cal', $cal );
 $smarty->assign( 'range', $range );
 $smarty->assign( 'chart1', $chart1 );
+$smarty->assign( 'chart1_labels_x', $chart1_labels_x );
