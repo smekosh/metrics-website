@@ -5,7 +5,7 @@
 	<meta charset="utf-8" />
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
-	<link type="image/x-icon" rel="icon" href="{$homepage}/favicon.ico" />
+	<link type="image/x-icon" rel="icon" href="{$homepage}/assets/metrics-dashboard-favicon_16x16_miniscreen.ico" />
 
 	<title>VOA Metrics Dashboard</title>
 
