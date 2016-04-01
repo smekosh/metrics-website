@@ -79,8 +79,7 @@ class metricsData {
         ));
         $t = $st->fetchAll(PDO::FETCH_ASSOC);
         if( count($t) != 2 ) {
-            throw new Exception("Expected 2 results (for D and M sites).");
-            die;
+            return( 0 );
         }
         return( intval($t[0]["total"]) + intval($t[1]["total"]) );
     }
