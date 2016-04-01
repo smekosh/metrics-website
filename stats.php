@@ -58,3 +58,17 @@ $smarty->assign( 'cal', $cal );
 $smarty->assign( 'range', $range );
 $smarty->assign( 'chart1', $chart1 );
 $smarty->assign( 'chart1_labels_x', $chart1_labels_x );
+
+$drift = $stats->publishDrift();
+$chart2 = array();
+foreach( $drift as $k => $v ) {
+    $chart2[] = array("Article #" . $v["article_id"], intval($v["diff"]));
+}
+usort($chart2, function($a, $b) {
+    if( $b[1] < $a[1] ) return( 1 );
+    return( -1 );
+});
+
+#echo "<PRE>"; print_r( $chart2 ); die;
+
+$smarty->assign( 'chart2', $chart2 );

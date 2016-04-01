@@ -515,4 +515,21 @@ class metricsStats extends metricsData {
         # return( $ret );
     }
 
+    function publishDrift() {
+        $ret = array();
+        $st = $this->db->prepare(
+            "select * from urltrap order by id desc limit 1000"
+        );
+        $st->execute();
+        $r = $st->fetchAll(PDO::FETCH_ASSOC);
+        foreach( $r as $k => $v ) {
+            $a = strtotime($v["stamp"]);
+            $b = strtotime($v["pubdate"]);
+            $diff = intval(($a - $b) / 60);
+            $v["diff"] = $diff;
+            $ret[] = $v;
+        }
+        return( $ret );
+    }
+
 }

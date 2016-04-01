@@ -100,6 +100,15 @@ table.stats { }
     </div>
 </div>
 
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12 col-md-12">
+            <h1>Publish Drift</h1>
+            <div id="chart_2" style="height:15000px"></div>
+        </div>
+    </div>
+</div>
+
 {/block}
 
 {block name="footer" append}
@@ -157,5 +166,18 @@ $("#chart_1").highcharts({
     ]
 
 })
+
+$("#chart_2").highcharts({
+    chart: {
+        type: "column",
+        inverted: true
+    },
+    series: [
+        {
+            name: 'Minutes',
+            data: {$chart2|json_encode}
+        }
+    ]
+});
 </script>
 {/block}
