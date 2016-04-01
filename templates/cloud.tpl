@@ -15,6 +15,8 @@
     onmouseover="this.className='cloud-active';"
     onmouseout="this.className='';"
     style="color: {cycle values='#444,silver,gray'}; font-size:{fontsize count=$data|count value=$count max=$data|max}px"
->{$word} <span class="cloud-count">({$count})</span></span>
+>{$word|truncate:31:'...':true} <span class="cloud-count">({$count})</span></span>
 
 {/foreach}
+
+3938
