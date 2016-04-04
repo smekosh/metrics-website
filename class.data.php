@@ -98,16 +98,16 @@ class metricsData {
                 `article_id`=:article_id and
                 `day`=:day and
                 `hour`=:hour
-            order by `urltype` asc, `id` desc
-            limit 2"
+            order by `id` desc
+            limit 1"
         );
         $st->execute(array(
             "article_id" => $article_id,
             "day" => $day,
             "hour" => $hour
         ));
-        $articles = $st->fetchAll(PDO::FETCH_ASSOC);
-        return($articles[0]["title"]);
+        $article = $st->fetch(PDO::FETCH_ASSOC);
+        return($article["title"]);
     }
 
     /**
@@ -128,16 +128,16 @@ class metricsData {
                 `article_id`=:article_id and
                 `day`=:day and
                 `hour`=:hour
-            order by `urltype` asc, `id` desc
-            limit 2"
+            order by `id` desc
+            limit 1"
         );
         $st->execute(array(
             "article_id" => $article_id,
             "day" => $day,
             "hour" => $hour
         ));
-        $articles = $st->fetchAll(PDO::FETCH_ASSOC);
-        return($articles[0]["url"]);
+        $article = $st->fetch(PDO::FETCH_ASSOC);
+        return($article["url"]);
     }
 
     /**
@@ -159,16 +159,16 @@ class metricsData {
                 `article_id`=:article_id and
                 `day`=:day and
                 `hour`=:hour
-            order by `urltype` asc, `id` desc
-            limit 2"
+            order by `id` desc
+            limit 1"
         );
         $st->execute(array(
             "article_id" => $article_id,
             "day" => $day,
             "hour" => $hour
         ));
-        $articles = $st->fetchAll(PDO::FETCH_ASSOC);
-        return($articles[0]["fb.shares"]);
+        $article = $st->fetch(PDO::FETCH_ASSOC);
+        return($article["fb.shares"]);
     }
 
     /**
@@ -190,19 +190,18 @@ class metricsData {
                 `day`=:day and
                 `hour`=:hour
             order by `id` desc
-            limit 2"
+            limit 1"
         );
         $st->execute(array(
             "article_id" => $article_id,
             "day" => $day,
             "hour" => $hour
         ));
-        $articles = $st->fetchAll(PDO::FETCH_ASSOC);
-        $comments = 0;
-        foreach( $articles as $article ) {
-            if( $article["comments"] > 0 ) $comments += $article["comments"];
-        }
-        return( $comments );
+        $article = $st->fetch(PDO::FETCH_ASSOC);
+        if( $article["comments"] > 0 ) return( $article["comments"] );
+
+        //TODO: pass a -1 through for comments closed?
+        return( 0 );
     }
 
     /**
@@ -213,7 +212,7 @@ class metricsData {
      */
     function get_pubdate_by_article_id($article_id) {
         $st = $this->db->prepare("
-            select * from `urltrap` where `article_id`=:article_id"
+            select * from `urltrap` where `article_id`=:article_id limit 1"
         );
         $st->execute(array(
             "article_id" => $article_id
@@ -239,7 +238,8 @@ class metricsData {
             select
                 sum(`comments`) as `comments_total`
             from reports
-                where `comments`>0 and
+            where
+                `comments`>0 and
                 `day`=:day and
                 `hour`=:hour"
         );
@@ -266,25 +266,20 @@ class metricsData {
     function query_total_shares($day, $hour) {
         $st = $this->db->prepare("
             select
-                count(*) as `rows`,
-                `article_id`,
-                max(`fb.shares`) as `shares`,
-                `urltype`
+                sum(`fb.shares`) as `shares`
             from `reports`
-            where `fb.shares`>0 and
-            `day`=:day
-            group by `article_id`"
+            where
+                `fb.shares`>0 and
+                `day`=:day and
+                `hour`=:hour"
         );
         $st->execute(array(
-            "day" => $day
+            "day" => $day,
+            "hour" => $hour
         ));
 
-        $articles = $st->fetchAll(PDO::FETCH_ASSOC);
-        $count = 0;
-        foreach( $articles as $article ) {
-            $count += $article["shares"];
-        }
-        return( $count );
+        $shares = $st->fetch(PDO::FETCH_ASSOC);
+        return( $shares["shares"] );
     }
 
     /**
@@ -339,6 +334,7 @@ class metricsData {
         ));
         $top_stories = $st->fetchAll(PDO::FETCH_ASSOC);
         $top_stories = $this->details_for_query($top_stories, $day, $hour);
+        #echo "<PRE>"; print_r( $top_stories ); die;
         return( $top_stories );
     }
 
