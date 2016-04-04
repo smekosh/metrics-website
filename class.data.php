@@ -62,26 +62,22 @@ class metricsData {
      */
     function query_total_pageviews($day, $hour) {
         $st = $this->db->prepare("
-            select
-                count(*) as `rows`,
-                `urltype`,
-                `total_pageviews` as `total`
+            select *
             from `reports`
             where
                 `day`=:day and
                 `hour`=:hour
-            group by `urltype`
-            order by `urltype`"
+            limit 1"
         );
         $st->execute(array(
             "day" => $day,
             "hour" => $hour
         ));
-        $t = $st->fetchAll(PDO::FETCH_ASSOC);
-        if( count($t) != 2 ) {
+        $t = $st->fetch(PDO::FETCH_ASSOC);
+        if( empty($t) ) {
             return( 0 );
         }
-        return( intval($t[0]["total"]) + intval($t[1]["total"]) );
+        return( $t["total_pageviews"] );
     }
 
     /**
