@@ -67,6 +67,7 @@ class metricsData {
             where
                 `day`=:day and
                 `hour`=:hour
+            order by `id` desc
             limit 1"
         );
         $st->execute(array(
@@ -294,7 +295,7 @@ class metricsData {
             $v["url"] = $this->get_url_by_article_id($v["article_id"], $day, $hour);
             $v["comments"] = $this->get_comments_by_article_id($v["article_id"], $day, $hour);
             $v["shares"] = $this->get_shares_by_article_id($v["article_id"], $day, $hour);
-            $v["pageviews"] = $v["combined_pageviews"];
+            $v["pageviews"] = $v["pageviews"];
             $v["social"] = $v["shares"];
             $v["email"] = 0;
             $v["pubdate"] = $this->get_pubdate_by_article_id($v["article_id"]);
@@ -317,16 +318,12 @@ class metricsData {
         }
 
         $st = $this->db->prepare("
-            select
-                count(*) as `rows`,
-                `article_id`,
-                sum(`pageviews`) as `combined_pageviews`
+            select *
             from `reports`
             where
                 `day`=:day and
                 `hour`=:hour
-            group by article_id
-            order by combined_pageviews desc"
+            order by pageviews desc"
         );
         $st->execute(array(
             "day" => $day,
@@ -334,7 +331,6 @@ class metricsData {
         ));
         $top_stories = $st->fetchAll(PDO::FETCH_ASSOC);
         $top_stories = $this->details_for_query($top_stories, $day, $hour);
-        #echo "<PRE>"; print_r( $top_stories ); die;
         return( $top_stories );
     }
 
@@ -390,9 +386,7 @@ class metricsData {
             "day" => $day
         ));
         $terms = $st->fetchAll(PDO::FETCH_ASSOC);
-#echo "<PRE>"; print_r( $terms); die;
         $terms = $this->combine_search_terms($terms);
-#echo "<PRE>"; print_r( $terms); die;
         return( $terms );
     }
 
@@ -495,7 +489,7 @@ class metricsStats extends metricsData {
     function getHistogramReports($day) {
         #$ret = array();
         $st = $this->db->prepare(
-            "select `hour`, count(*) as `count` from `reports` where `day`=:day and urltype='m' group by `hour` order by `hour`"
+            "select `hour`, count(*) as `count` from `reports` where `day`=:day group by `hour` order by `hour`"
         );
         $st->execute(array("day" => $day));
         $r = $st->fetchAll(PDO::FETCH_ASSOC);
