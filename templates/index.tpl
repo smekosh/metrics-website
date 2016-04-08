@@ -16,7 +16,7 @@
 	<link href="{$homepage}/vendor/components/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
 
 	<!-- Custom styles for this template -->
-	<link href="{$homepage}/dashboard.css" rel="stylesheet" />
+	<link href="{$homepage}/dashboard.css?ts=20160408" rel="stylesheet" />
 
 	<!--[if lt IE 9]>
 	<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
