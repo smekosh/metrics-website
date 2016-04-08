@@ -192,9 +192,9 @@
     function show_chart(chart_id, that) {
         $("svg.chart").hide();
         var chart = $("#" + chart_id);
-        // chart.css({ height: '1px' });
+        chart.css({ opacity: 0 });
         chart.show();
-        // chart.stop().animate({ height: '240px' }, 300);
+        chart.stop().animate({ opacity:1 }, 300);
     }
     $(document).ready(function() {
         $(".chart-selector").click(function() {
@@ -204,6 +204,10 @@
             $(this).parent().addClass("active-chart");
         });
         show_chart('chart_1');
+
+        //FIXME: this is for chart debug purposes
+        // for( var i = 0; i < 5; i++ ) $(".container:eq(0)").remove();
+        // $("table").remove();
     });
 </script>
 

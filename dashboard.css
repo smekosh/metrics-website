@@ -59,7 +59,7 @@ h2.blockhead {
     cursor: pointer;
 }
 
-.chart-container { height: 240px }
+.chart-container { }
 
 
 svg .horizontal path { stroke:#dedede; stroke-width:1; }
