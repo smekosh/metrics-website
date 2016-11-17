@@ -15,7 +15,19 @@
 {foreach $top_stories as $story}
 {if $story@index < 10}
         <tr>
-            <td class="text-left"><a href="{$story.url}" target="_blank">{$story.title|default:'(Untitled or Title Missing)'}</a></td>
+            <td class="text-left" {if !$story.title}title="Title Missing :/"{/if}>
+                {if $story.url}<a href="{$story.url}" target="_blank">{/if}{strip}
+{if $story.title}
+    {$story.title}
+{else}
+    {if $story.url}
+        {$story.url}
+    {else}
+        # {$story.article_id}
+    {/if}
+{/if}
+{if $story.url}</a>{/if}
+            {/strip}</td>
 {if $story.pubdate}
             <td class="text-left text-muted hint" title="Published {$story.pubdate|date_format:"%A, %B %e, %Y"} at {$story.pubdate|date_format:"%l:%M %p, %Z"}"><span class="visible-xs-inline">{$story.pubdate|date_format:"%a"}</span><span class="hidden-xs">{$story.pubdate|date_format:"l"}</span></td>
             <td class="text-left text-muted hint" title="Published {$story.pubdate|date_format:"%A, %B %e, %Y"} at {$story.pubdate|date_format:"%l:%M %p, %Z"}"><span class="visible-xs-inline">{$story.pubdate|date_format:"%a"}</span><span class="pubdate-relative">{$story.pubdate|ago} ago</span></td>
